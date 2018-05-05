@@ -13,7 +13,6 @@ import cx from "classnames";
 
 import headerStyle from "assets/jss/material-dashboard-react/headerStyle.jsx";
 
-import HeaderLinks from "./HeaderLinks";
 
 function Header({ ...props }) {
   function makeBrand() {
@@ -39,9 +38,6 @@ function Header({ ...props }) {
             {makeBrand()}
           </Button>
         </div>
-        <Hidden smDown implementation="css">
-          <HeaderLinks />
-        </Hidden>
         <Hidden mdUp>
           <IconButton
             className={classes.appResponsive}

@@ -4,9 +4,9 @@ import Offers from "views/Offers/Dashboard.jsx";
 import Routine from "views/Routine/Dashboard.jsx";
 
 import {
-  DirectionsRun,//for routine
-  AttachMoney,//for oferts
-  Favorite, //for nutrition
+  DirectionsRun,
+  PriorityHigh,
+  Favorite, 
   Dashboard,
 } from "@material-ui/icons";
 
@@ -20,16 +20,16 @@ const dashboardRoutes = [
   },
   {
     path: "/routines",
-    sidebarName: "Rutina del dia",
+    sidebarName: "Rutina",
     navbarName: "routine",
     icon: DirectionsRun,
     component: Routine
   },
   {
-    path: "/offers",
-    sidebarName: "Ofertas",
-    navbarName: "offers",
-    icon: AttachMoney,
+    path: "/information",
+    sidebarName: "Informacion",
+    navbarName: "Todo tipo de informacion",
+    icon: PriorityHigh,
     component: Offers
   },
   {

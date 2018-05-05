@@ -19,7 +19,8 @@ function RegularCard({ ...props }) {
     cardTitle,
     cardSubtitle,
     content,
-    footer
+    footer,
+    height
   } = props;
   const plainCardClasses = cx({
     [" " + classes.cardPlain]: plainCard
@@ -42,7 +43,9 @@ function RegularCard({ ...props }) {
         title={cardTitle}
         subheader={cardSubtitle}
       />
+      <div style={{overflowY: 'scroll',height:height,overflowScrolling: "touch",WebkitOverflowScrolling: "touch",}}>
       <CardContent>{content}</CardContent>
+      </div>
       {footer !== undefined ? (
         <CardActions className={classes.cardActions}>{footer}</CardActions>
       ) : null}
