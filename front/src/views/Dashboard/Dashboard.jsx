@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from 'axios';
 import ReactSpeedometer from "react-d3-speedometer";
+import FacebookProvider, { EmbeddedPost,Page  } from 'react-facebook';
 // react plugin for creating charts
 import { withStyles, Grid } from "material-ui";
 import Button from 'material-ui/Button';
@@ -91,13 +92,19 @@ class Dashboard extends React.Component {
         </Grid>
         <Grid container>
           <ItemGrid xs={12} sm={12} md={4}>
-            
+          <FacebookProvider appId="1802119613165004">
+            <EmbeddedPost href="https://www.facebook.com/DinamicFitnessGym/photos/a.925163244219072.1073741829.886559111412819/1659876280747761/?type=3" width="500" />
+          </FacebookProvider>
           </ItemGrid>
           <ItemGrid xs={12} sm={12} md={4}>
-           
+          <FacebookProvider appId="1802119613165004">
+            <EmbeddedPost href="https://www.facebook.com/DinamicFitnessGym/photos/a.925163244219072.1073741829.886559111412819/1659876280747761/?type=3" width="500" />
+          </FacebookProvider>
           </ItemGrid>
           <ItemGrid xs={12} sm={12} md={4}>
-           
+          <FacebookProvider appId="1802119613165004">
+            <EmbeddedPost href="https://www.facebook.com/DinamicFitnessGym/photos/a.925163244219072.1073741829.886559111412819/1659876280747761/?type=3" width="500" />
+          </FacebookProvider>
           </ItemGrid>
         </Grid>
         <Grid container>

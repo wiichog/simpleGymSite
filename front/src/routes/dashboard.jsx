@@ -1,6 +1,5 @@
 import DashboardPage from "views/Dashboard/Dashboard.jsx";
 import Nutrition from "views/Nutrition/nutrition.jsx";
-import Offers from "views/Offers/offers.jsx";
 import Routine from "views/Routine/routines.jsx";
 import {
   DirectionsRun,
@@ -23,13 +22,6 @@ const dashboardRoutes = [
     navbarName: "routine",
     icon: DirectionsRun,
     component: Routine
-  },
-  {
-    path: "/information",
-    sidebarName: "Informacion",
-    navbarName: "Todo tipo de informacion",
-    icon: PriorityHigh,
-    component: Offers
   },
   {
     path: "/nutrition",

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import axios from 'axios';
+import Button from 'material-ui/Button';
+import FacebookProvider, { EmbeddedPost } from 'react-facebook';
 // react plugin for creating charts
 import {
   ContentCopy,
@@ -92,19 +94,21 @@ class Dashboard extends React.Component {
       <div>
         <Grid container>
             <ItemGrid xs={12} sm={12} md={5}>
-                <RegularCard
-                cardTitle="Pecho"
-                content={
-                  <Table
-                          id="pechoData"
-                          tableHeaderColor="primary"
-                          tableHead={["Ejercicio","Equipo","Sets","Repeticiones"]}
-                          tableData={
-                            this.state.pechoData
-                          }
-                        />
-                }
-                />
+                  <RegularCard
+                    cardTitle="Pecho"
+                    content={
+                      <Table
+                        id="pechoData"
+                        tableHeaderColor="primary"
+                        tableHead={["Ejercicio","Equipo","Sets","Repeticiones"]}
+                        tableData={
+                          this.state.pechoData
+                        }
+                      />
+                    }
+            />
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={5}>
                 <RegularCard
                 cardTitle="Pierna"
                 content={
@@ -118,6 +122,19 @@ class Dashboard extends React.Component {
                         />
                 }
                 />
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={2}>
+            <Button variant="raised" size="large" color="primary" onClick={(e) => this.changeAction(e)}>
+                Iniciar Rutina
+              </Button>
+              <div>
+              
+              </div>
+              <Button variant="raised" size="large" color="primary" onClick={(e) => this.changeAction(e)}>
+                Finalizar Rutina
+              </Button>
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={5}>
                 <RegularCard
                 cardTitle="Espalda"
                 content={
@@ -131,6 +148,8 @@ class Dashboard extends React.Component {
                         />
                 }
                 />
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={5}>
                 <RegularCard
                 cardTitle="Tricept"
                 content={
@@ -144,6 +163,8 @@ class Dashboard extends React.Component {
                         />
                 }
                 />
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={5}>
                 <RegularCard
                 cardTitle="Hombro"
                 content={
@@ -157,6 +178,8 @@ class Dashboard extends React.Component {
                         />
                 }
                 />
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={5}>
                 <RegularCard
                 cardTitle="Bicept"
                 content={
@@ -170,38 +193,6 @@ class Dashboard extends React.Component {
                         />
                 }
                 />
-            </ItemGrid>
-            <ItemGrid xs={12} sm={12} md={5}>
-              <StatsCard
-                icon={ContentCopy}
-                iconColor="orange"
-                title="Used Space"
-                description="49/50"
-                small="GB"
-                statIcon={Warning}
-                statIconColor="danger"
-                statLink={{ text: "Get More Space...", href: "#pablo" }}
-              />
-              <StatsCard
-                icon={ContentCopy}
-                iconColor="orange"
-                title="Used Space"
-                description="49/50"
-                small="GB"
-                statIcon={Warning}
-                statIconColor="danger"
-                statLink={{ text: "Get More Space...", href: "#pablo" }}
-              />
-              <StatsCard
-                icon={ContentCopy}
-                iconColor="orange"
-                title="Used Space"
-                description="49/50"
-                small="GB"
-                statIcon={Warning}
-                statIconColor="danger"
-                statLink={{ text: "Get More Space...", href: "#pablo" }}
-              />
             </ItemGrid>
         </Grid>
       </div>
