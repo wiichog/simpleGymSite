@@ -1,8 +1,7 @@
-import DashboardPage from "views/Others/Dashboard/Dashboard.jsx";
-import Nutrition from "views/Nutrition/Dashboard.jsx";
-import Offers from "views/Offers/Dashboard.jsx";
-import Routine from "views/Routine/Dashboard.jsx";
-
+import DashboardPage from "views/Dashboard/Dashboard.jsx";
+import Nutrition from "views/Nutrition/nutrition.jsx";
+import Offers from "views/Offers/offers.jsx";
+import Routine from "views/Routine/routines.jsx";
 import {
   DirectionsRun,
   PriorityHigh,
@@ -37,7 +36,7 @@ const dashboardRoutes = [
     sidebarName: "Nutricion",
     navbarName: "Nutrition",
     icon: Favorite,
-    component: Routine
+    component: Nutrition
   },
   { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }
 ];

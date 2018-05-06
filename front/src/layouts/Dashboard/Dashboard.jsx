@@ -6,7 +6,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { withStyles } from "material-ui";
 
-import { Header, Footer, Sidebar } from "components";
+import { Sidebar } from "components";
 
 import dashboardRoutes from "routes/dashboard.jsx";
 
@@ -59,11 +59,6 @@ class App extends React.Component {
           {...rest}
         />
         <div className={classes.mainPanel} ref="mainPanel">
-          <Header
-            routes={dashboardRoutes}
-            handleDrawerToggle={this.handleDrawerToggle}
-            {...rest}
-          />
           {this.getRoute() ? (
             <div className={classes.content}>
               <div className={classes.container}>{switchRoutes}</div>
@@ -71,7 +66,7 @@ class App extends React.Component {
           ) : (
             <div className={classes.map}>{switchRoutes}</div>
           )}
-          {this.getRoute() ? <Footer /> : null}
+          
         </div>
       </div>
     );
