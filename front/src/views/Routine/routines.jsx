@@ -2,23 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from 'axios';
 import Button from 'material-ui/Button';
-import FacebookProvider, { EmbeddedPost } from 'react-facebook';
 // react plugin for creating charts
-import {
-  ContentCopy,
-  Warning
-} from "@material-ui/icons";
 import { withStyles, Grid } from "material-ui";
 import {
-  StatsCard,
   RegularCard,
   Table,
   ItemGrid
 } from "components";
-import {
-  ArrowUpward,
-  AccessTime
-} from "@material-ui/icons";
 
 
 import dashboardStyle from "assets/jss/material-dashboard-react/dashboardStyle";
@@ -50,6 +40,7 @@ class Dashboard extends React.Component {
       var musculo = response.data[i]['Musculo']
       var equipo = response.data[i]['Equipo']
       var ejercicio = response.data[i]['Ejercicio']
+      // eslint-disable-next-line
       switch(musculo) {
         case "Pecho":
             pechoData1.push([ejercicio,equipo,4,rand])

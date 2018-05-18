@@ -42,6 +42,10 @@ function ProfileCard({ ...props }) {
       <CardActions className={classes.textAlign + " " + classes.cardActions}>
         {footer}
       </CardActions>
+      <br />
+      <CardActions className={classes.textAlign + " " + classes.cardActions}>
+       
+      </CardActions>
     </Card>
   );
 }

@@ -3,11 +3,6 @@ var mysql = require('mysql')
 var express = require('express');
 var app = express();
 
-
-
-
-//mysqlQuery("UPDATE `rutinausuario` SET`status`=1 WHERE `fechaFinal`<CURDATE()","updateRutinas");
-
 app.get('/crearRutina', function(req, res) {
 	console.log('****crearRutina****')
 	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
@@ -64,6 +59,36 @@ app.get('/traerRutinas', function(req, res) {
 			connection.query("Select * from ejercicios where id in ("+rutina.toString()+")",function(err,resultado){
 				res.json(resultado)
 			});
+		});
+	});
+  console.log('********')
+});
+
+app.get('/getInfoUser', function(req, res) {
+	console.log('****getInfoUser****')
+	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
+	var userId = "1"
+	connection.connect(function(err) {
+	if (err) throw err;
+		var result = connection.query("SELECT `nombre`,`edad`,`peso` FROM `usuario` WHERE `idusuario` = "+ userId +"", function (err, result) {
+			if (err) throw err;
+			var info = [result[0].nombre,result[0].edad,result[0].peso]
+			res.json(info)
+		});
+	});
+  console.log('********')
+}); 
+
+app.get('/saveDate', function(req, res) {
+	console.log('****saveDate****')
+	var date = req.query.date;
+	console.log(date)
+	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
+	connection.connect(function(err) {
+	if (err) throw err;
+		var result = connection.query("INSERT INTO `clinica`(`idcita`, `idusuario`, `fecha`, `status`) VALUES (1,1,'"+date+"',1)", function (err, result) {
+			if (err) throw err;
+			res.send("0")
 		});
 	});
   console.log('********')
