@@ -86,9 +86,17 @@ app.get('/saveDate', function(req, res) {
 	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
 	connection.connect(function(err) {
 	if (err) throw err;
-		var result = connection.query("INSERT INTO `clinica`(`idcita`, `idusuario`, `fecha`, `status`) VALUES (1,1,'"+date+"',1)", function (err, result) {
-			if (err) throw err;
-			res.send("0")
+			var result = connection.query("SELECT `fecha` FROM `clinica` WHERE `fecha`= '"+ date +"'", function (err, result) {
+				if(result[0] == null){
+				var result = connection.query("INSERT INTO `clinica`(`idcita`, `idusuario`, `fecha`, `status`) VALUES (1,1,'"+date+"',1)", function (err, result) {
+					if (err) throw err;
+					res.send("0")
+				});
+			}
+			else{
+				res.send("1")
+			}
+			//res.send("99")
 		});
 	});
   console.log('********')

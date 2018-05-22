@@ -20,6 +20,7 @@ import dashboardStyle from "assets/jss/material-dashboard-react/dashboardStyle";
 import 'assets/jss/material-dashboard-react/reactPopUp.css';
 import Popup from 'react-popup'
 
+
 class Dashboard extends React.Component {
   state = {
     value: 0,
@@ -29,16 +30,19 @@ class Dashboard extends React.Component {
     peso: "",
     edad: "",
   };
-  saveDate(e){
-    e.preventDefault();
-    axios.get('http://localhost:8080/saveDate?date='+this.state.date+'').then(response => {
-    // eslint-disable-next-line  
-    if(response.data=="0"){
-        Popup.alert('Cita Guardada con exito');
-      }
-      else{
-        Popup.alert('Error');
-      }
+  saveDate(date){
+    axios.get('http://localhost:8080/saveDate?date='+date+'').then(response => {
+        // eslint-disable-next-line  
+        console.log(this.state.date)
+        if(response.data=="0"){
+            Popup.alert('Cita Guardada con exito');
+          }
+        else if(response.data=="1"){
+            Popup.alert('Ya contamos con una cita ese dia');
+          }
+        else if(response.data=="99"){
+          Popup.alert('error');
+        }
     });
   }
   changeAction(e){
@@ -72,7 +76,12 @@ class Dashboard extends React.Component {
       [name]: event.target.value,
     });
   };
-  onChangeDateTimePicker = date => this.setState({ date })
+  onChangeDateTimePicker(date){
+    this.setState({
+      date : date.toLocaleDateString("en-US")
+    })
+    this.saveDate(date.toLocaleDateString("en-US"))
+  }
   render() {
     return (
       <div>
@@ -92,29 +101,14 @@ class Dashboard extends React.Component {
           />
         </ItemGrid>
           <ItemGrid xs={12} sm={6} md={8}>
-          <Grid container>
-          <ItemGrid xs={12} sm={6} md={6}>
-          <RegularCard
-              cardTitle="Calendario de Nutricion"
-              content={
-                <Calendar
-                  onChange={this.onChange}
-                  value={this.state.date}
-                />
-              }
-            />
-          </ItemGrid>
+          
           <ItemGrid xs={12} sm={6} md={6}>
               Ingresar Fecha para cita de nutricion:<br />
-              <DateTimePicker
-                onChange={this.onChangeDateTimePicker}
+              <Calendar
+                onChange={(date) => this.onChangeDateTimePicker(date)}
                 value={this.state.date}
-              /><br /><br />
-              <Button variant="raised" color="primary" onClick={(e) => this.saveDate(e)}>
-                  Guardar Cita
-              </Button>
+              />
           </ItemGrid>
-          </Grid>
           
           </ItemGrid>
         </Grid>
