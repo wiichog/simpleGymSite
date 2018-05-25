@@ -15,15 +15,20 @@ import {
 
 import dashboardStyle from "assets/jss/material-dashboard-react/dashboardStyle";
 const styleT = {
-      containerOutter: {
-      width: '200px',
-      height: '200px',
-      },
-      containerInner: {
-      lineHeight: '10'
-      }
+        containerOutter: {
+        width: '200px',
+        height: '200px',
+        },
+        containerInner: {
+        lineHeight: '10'
+        }
 }
 class Dashboard extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   state = {
     value: 0,
     pechoData:[],
@@ -141,9 +146,10 @@ class Dashboard extends React.Component {
                 />
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={2}>
-            <Button variant="raised" size="large" color="primary" onClick={(e) => this.changeAction(e)}>
+            <Button variant="raised" size="large" color="primary" onClick={(handleClick) => this.changeAction(handleClick)}>
                 Iniciar Rutina
                 
+
               </Button>
               
               <Stopwatch
@@ -152,13 +158,12 @@ class Dashboard extends React.Component {
                 hours={0}
                 limit={"10:00:00"}
                 withLoop={true}
-                custom = {styleT}
                 onCallback={() => console.log('Finish')}
                />
                
               <Button variant="raised" size="large" color="primary" onClick={(e) => this.changeAction(e)}>
                 Finalizar Rutina
-              </Button>
+                              </Button>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={5}>
                 <RegularCard
