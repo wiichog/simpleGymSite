@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from 'axios';
 import Button from 'material-ui/Button';
+import ReactDom from 'react-dom';
+import Stopwatch from 'react-stopwatch';
 // react plugin for creating charts
 import { withStyles, Grid } from "material-ui";
 import {
@@ -12,7 +14,15 @@ import {
 
 
 import dashboardStyle from "assets/jss/material-dashboard-react/dashboardStyle";
-
+const styleT = {
+      containerOutter: {
+      width: '200px',
+      height: '200px',
+      },
+      containerInner: {
+      lineHeight: '10'
+      }
+}
 class Dashboard extends React.Component {
   state = {
     value: 0,
@@ -24,6 +34,7 @@ class Dashboard extends React.Component {
     biceptData:[]
 
   };
+
   componentWillMount(){
     axios.get('http://localhost:8080/traerRutinas?userId=1').then(response => {
       var pechoData1=[]
@@ -80,8 +91,23 @@ class Dashboard extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+
+  handleClick(){
+    <Stopwatch
+    seconds={0}
+    minutes={0}
+    hours={0}
+    limit={"00:00:10"}
+    withLoop={true}
+    onCallback={() => console.log('Finish')}
+   />
+  };
+
+  
+
   render() {
     return (
+
       <div>
         <Grid container>
             <ItemGrid xs={12} sm={12} md={5}>
@@ -117,10 +143,19 @@ class Dashboard extends React.Component {
             <ItemGrid xs={12} sm={12} md={2}>
             <Button variant="raised" size="large" color="primary" onClick={(e) => this.changeAction(e)}>
                 Iniciar Rutina
+                
               </Button>
-              <div>
               
-              </div>
+              <Stopwatch
+                seconds={0}
+                minutes={0}
+                hours={0}
+                limit={"10:00:00"}
+                withLoop={true}
+                custom = {styleT}
+                onCallback={() => console.log('Finish')}
+               />
+               
               <Button variant="raised" size="large" color="primary" onClick={(e) => this.changeAction(e)}>
                 Finalizar Rutina
               </Button>
