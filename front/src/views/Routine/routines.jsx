@@ -4,6 +4,7 @@ import axios from 'axios';
 import Button from 'material-ui/Button';
 import ReactDom from 'react-dom';
 import Stopwatch from 'react-stopwatch';
+import Timer from '../../components/Timer';
 // react plugin for creating charts
 import { withStyles, Grid } from "material-ui";
 import {
@@ -26,20 +27,19 @@ const styleT = {
 class Dashboard extends React.Component {
   constructor(props){
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.toggleTimerVisibility = this.toggleTimerVisibility.bind(this);
   }
 
-  state = {
-    value: 0,
-    pechoData:[],
-    piernaData:[],
-    espaldaData:[],
-    triceptData:[],
-    hombroData:[],
-    biceptData:[]
-
-  };
-
+    state = {
+      value: 0,
+      pechoData:[],
+      piernaData:[],
+      espaldaData:[],
+      triceptData:[],
+      hombroData:[],
+      biceptData:[],
+      showTimer: false
+    }
   componentWillMount(){
     axios.get('http://localhost:8080/traerRutinas?userId=1').then(response => {
       var pechoData1=[]
@@ -97,16 +97,10 @@ class Dashboard extends React.Component {
     this.setState({ value: index });
   };
 
-  handleClick(){
-    <Stopwatch
-    seconds={0}
-    minutes={0}
-    hours={0}
-    limit={"00:00:10"}
-    withLoop={true}
-    onCallback={() => console.log('Finish')}
-   />
-  };
+  toggleTimerVisibility = () => {
+    let newValue = !this.state.showTimer
+    this.setState({showTimer: newValue})
+  }
 
   
 
@@ -139,6 +133,7 @@ class Dashboard extends React.Component {
                           tableHeaderColor="primary"
                           tableHead={["Ejercicio","Equipo","Sets","Repeticiones"]}
                           tableData={
+              
                             this.state.piernaData
                           }
                         />
@@ -146,22 +141,14 @@ class Dashboard extends React.Component {
                 />
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={2}>
-            <Button variant="raised" size="large" color="primary" onClick={(handleClick) => this.changeAction(handleClick)}>
+            <Button variant="raised" size="large" color="primary" disabled={(this.state.showTimer ? " disabled": "")} onClick={this.toggleTimerVisibility}>
                 Iniciar Rutina
                 
 
               </Button>
               
-              <Stopwatch
-                seconds={0}
-                minutes={0}
-                hours={0}
-                limit={"10:00:00"}
-                withLoop={true}
-                onCallback={() => console.log('Finish')}
-               />
                
-              <Button variant="raised" size="large" color="primary" onClick={(e) => this.changeAction(e)}>
+              <Button variant="raised" size="large" color="primary" disabled={(!this.state.showTimer ? " disabled": "")} onClick={this.toggleTimerVisibility}>
                 Finalizar Rutina
                               </Button>
             </ItemGrid>
@@ -226,6 +213,9 @@ class Dashboard extends React.Component {
                 />
             </ItemGrid>
         </Grid>
+        {(this.state.showTimer && <Timer start={Date.now()}/>)}
+
+
       </div>
     );
   }
