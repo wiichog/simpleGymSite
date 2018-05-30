@@ -1,12 +1,21 @@
 import DashboardPage from "views/Dashboard/Dashboard.jsx";
 import Routine from "views/Routine/routines.jsx";
+import login from "views/login/login.jsx";
 
 import {
   DirectionsRun,
   Dashboard,
+  People,
 } from "@material-ui/icons";
 
 const dashboardRoutes = [
+  {
+    path: "/login",
+    sidebarName: "Log In",
+    navbarName: "Log In",
+    icon: People,
+    component: login
+  },
   {
     path: "/dashboard",
     sidebarName: "Dashboard",

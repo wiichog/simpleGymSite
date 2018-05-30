@@ -3,6 +3,8 @@ var mysql = require('mysql')
 var express = require('express');
 var app = express();
 
+var userId = 0
+
 app.get('/crearRutina', function(req, res) {
 	console.log('****crearRutina****')
 	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
@@ -48,7 +50,7 @@ app.get('/crearRutina', function(req, res) {
 app.get('/traerRutinas', function(req, res) {
 	console.log('****traerRutinas****')
 	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
-	var userId = "1"
+	var userId = req.query.userId;
 	console.log('userId = '+ userId +'')
 	
 	connection.connect(function(err) {
@@ -67,7 +69,7 @@ app.get('/traerRutinas', function(req, res) {
 app.get('/getInfoUser', function(req, res) {
 	console.log('****getInfoUser****')
 	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
-	var userId = "1"
+	var userId = req.query.userId;
 	connection.connect(function(err) {
 	if (err) throw err;
 		var result = connection.query("SELECT `nombre`,`edad`,`peso` FROM `usuario` WHERE `idusuario` = "+ userId +"", function (err, result) {
@@ -102,8 +104,68 @@ app.get('/saveDate', function(req, res) {
   console.log('********')
 }); 
 
+app.get('/login', function(req, res) {
+	console.log('****login****')
+	var email = req.query.email;
+	var pass = req.query.password;
+	console.log(email)
+	console.log(pass)
+	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
+	connection.connect(function(err) {
+	if (err) throw err;
+			var result = connection.query("SELECT * FROM `usuario` WHERE `email`='"+email+"' and `pass`='"+pass+"'", function (err, result) {
+				console.log(result[0])
+				if(result[0] == null){
+					res.send("0")
+				}
+				else{
+					userId = result[0].idusuario
+					res.send(result[0].nombre)
+				}
+		});
+	});
+  console.log('********')
+}); 
 
+app.get('/clinica', function(req, res) {
+	console.log('****clinica****')
+	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
+	connection.connect(function(err) {
+	if (err) throw err;
+			var result = connection.query("SELECT fecha,nombre FROM `clinica` as t0 inner join usuario as t1 on t0.idusuario = t1.idusuario", function (err, result) {
+				res.send(result)
+		});
+	});
+  console.log('********')
+}); 
 
+app.get('/userId', function(req, res) {
+	console.log('****userId****')
+	res.send(userId.toString())
+  console.log('********')
+}); 
+
+app.get('/logOf', function(req, res) {
+	console.log('****logOf****')
+	userId = 0
+	res.send("hello")
+  console.log('********')
+}); 
+
+app.get('/saveTime', function(req, res) {
+	console.log('****saveTime****')
+	var time = req.query.time;
+	var userId = req.query.userId;
+	const connection = mysql.createConnection({host: "localhost",user: "root",password: "",database: "simplegymapp"});
+	connection.connect(function(err) {
+	if (err) throw err;
+		var result = connection.query("INSERT INTO `tiempousuario`(`tiempo`, `idusuario`, `fecha`) VALUES ('"+time+"','"+userId+"','"+new Date()+"')", function (err, result) {
+			if (err) throw err;
+			res.json("0")
+		});
+	});
+  console.log('********')
+}); 
 
 app.listen(8080, function () {
   console.log('App listening on port 8080!');
